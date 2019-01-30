@@ -58,17 +58,33 @@
                         <h3> An ice sheet thickness history </h3>
                     </section>
                     
+                    <section data-state="NGRIP-is-visible">
+                        <div id="NGRIP"></div>
+                    </section> 
                     <section data-state="ice-thickness-is-visible">
                         <div id="ice-thickness"></div>
-                    </section>
+                    </section>  
                 </section>
                 
-                <!-- the observed association with melt composition cahnge and ice sheet history -->
+                <!-- the observed association with melt composition change and ice sheet history -->
                 
                 <section>                  
                     <section>
                         <p> The increase in volcansim is also recorded as a reduction in Nb composition (Gee et al., 1998; Eason et al., 2015).</p>
                         <img width="1000" src='figures/slide2.png' style="background:none; border:none; box-shadow:none;" >
+                        <small> Correlation coefficient ~ 0.7 [Gaussian smoothing in R]</small>
+                    </section>
+                    
+                    <section data-state="Nb-raw-is-visible">
+                        <p> Increase in volcansim recorded as a reduction in Nb composition (Gee et al., 1998; Eason et al., 2015).</p>
+                        <div id="Nb-raw"></div>
+                    </section>
+                    
+                    <section>
+                        <div>
+                        <img width="800" src='figures/random-correlation.png' style="background:none; border:none; box-shadow:none;" >
+                        </div>
+                        <small> Correlation coefficient ~ 0.6 [Gaussian smoothing in R]</small>
                     </section>
                     
                 </section>
@@ -95,24 +111,62 @@
                             </tbody>
                         </table>
                     </section>
+                    
+                    <!-- step 1 to solve the coupled equations-->
+                    
                     <section>
-                        <p> Lets solve for melt production and percolation, in 1D: </p>
-                        <small> Mean velocity: $$ v = (1-\phi) v_{s} + \phi v_{l} = u + \partial_{t}w $$ </small><br><br>
-                        <small> Conservation of energy: $$ mL + \partial_{t}T + v\partial_{z}T - \kappa\partial_{z}^{2}T = 0 $$</small><br><br>
-                        <small> Permeability closure equation: $$ k = k_{0}\phi^{3} $$</small><br><br>
-                        <small> Conservation of mass (melt): $$ -m + \partial_{t}\phi + v\partial_{z}\phi + \frac{k_{0}\Delta\rho}{\eta_{l}} \phi_{2}\left(1-\frac{4}{3}\phi\right)\partial_{z}\phi = 0$$</small>                    
+                        <p> Step 1: Solve for melt production and transport </p>
+                        <ul>
+                            <li> Calculate the transport of melt through a porous medium. </li>
+                            <li> We need a relationship between melt porosity and permeability. </li>
+                            <li> This allows a continuity equation to be written. </li>
+                        </ul>
                     </section>
                     <section>
-                        <p> Solve the coupled equations for a melting column below a flexing plate </p>
-                        <img width="900" src='figures/slide3.png' style="background:none; border:none; box-shadow:none;" >
+                        <small> Mean velocity: $$ v = (1-\phi) v_{s} + \phi v_{l} $$ </small><br><br>
+                        <small> Modified Darcy's law to relate average and melt velocity: $$ v_{l} - v = \left(1 - \phi\right)\frac{k}{\phi \eta_{l}} \Delta\rho g $$</small><br><br>
+                        <small> Permeability closure equation: $$ k = k_{0}\phi^{3} $$</small><br><br>
+                        <small> Conservation of mass (melt): $$ -m + \partial_{t}\phi + v\partial_{z}\phi + \frac{k_{0}\Delta\rho g}{\eta_{l}} \phi^{2}\left(1-\frac{4}{3}\phi\right)\partial_{z}\phi = 0$$</small>                    
+                    </section>
+                    <section data-background-color="#000000">
+                        <div>
+                            <video width='30%' data-autoplay loop controls='true' src='videos/temp.mp4' type='video/mp4'></video>
+                            <video width='30%' data-autoplay loop controls='true' src='videos/poro.mp4' type='video/mp4'></video>
+                        </div>
+                        <small> That non-linear equation solved using finite elements (FEniCS + Python) </small>
                     </section>
                     
+                    <!-- step 2 to solve the coupled equations-->
+                    
+                    <section>
+                        <p> Step 2: Solve for displacement due to deglaciation </p>
+                        <ul>
+                            <li> We perturb the mantle upwelling by displacement due to deglaciation. </li>
+                            <li> We need to calculate how the displacement due to the ice load decreases with depth. </li>
+                            <li> We need to calculate how the displacement due to the ice load changes with time. </li>
+                        </ul>
+                    </section>
+                    <section>
+                        <small> Mean velocity: $$ v = (1-\phi) v_{s} + \phi v_{l} = u + \partial_{t}w $$ </small><br><br>
+                        <small>The displacement, $w$, due to the ice load diminishes with depth (England et al., 1983): $$ w = w_{0}exp\left(-\frac{\sqrt{3}\pi}{\lambda}z\right) $$ </small><br><br>
+                        <small>The surface displacement is from the solution to plate flexure: $$ N \partial_{x}^{4}\left(\partial_{t}w_{0}\right) = \frac{P_{ice}}{\tau_{e}} $$ </small><br><br>
+                        <small>[$\lambda$ is the glacier wavelength, $N$ is elastic fexural rigidity, $P_{ice}$ is the ice sheet load, $\tau_{e}$ is the viscoelastic decay time]</small>
+                    </section>
+                    <section>
+                        <div>
+                            <video width='60%' data-autoplay controls='true' src='videos/1e5.mp4' type='video/mp4'></video>
+                        </div>
+                        <small> Melt percolation solved using a finite volume TVD scheme (Matlab) </small>
+                    </section>
+                    
+                    
+                    
                     <section data-state="modelStep7-is-visible">
-                        <p> Prediction of eruption rate, $\phi v_{l}$, at the top </p>
+                        <p> Prediction of eruption rate, $\phi v_{l}$ when $k_{0} = 10^{-7}$ </p>
                         <div id="modelStep7"></div>
                     </section>
                     <section data-state="modelStep5-is-visible">
-                        <p> Prediction of eruption rate, $\phi v_{l}$, at the top </p>
+                        <p> Prediction of eruption rate, $\phi v_{l}$ when $k_{0} = 10^{-5}$ </p>
                         <div id="modelStep5"></div>
                     </section>
                     
@@ -139,7 +193,7 @@
 				</section>
                 <section>
                     <section>
-                        <h3> CO<sup>2</sup> flux </h3>
+                        <h3> CO<sub>2</sub> flux </h3>
                     </section>
                 </section>
                 
@@ -158,6 +212,9 @@
                 width: "100%",
                 height: "100%",
                 
+                // to stop plots being half way down the slide
+                center: false, 
+                
                 math: {
                     mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
                     //mathjax: 'MathJax/MathJax.js',
@@ -175,7 +232,122 @@
         
         <!-- plotly plots -->
         
+        <!-- plot of NGRIP and sea level  -->
+        
+        <script>
+            Reveal.addEventListener('NGRIP-is-visible', function() {
+                Plotly.d3.csv("data/NGRIP.csv", function(error1, data1) {
+                    Plotly.d3.csv("data/lambeck-2014-sea-level.csv", function(error2, data2) { 
+                        var x1 = [], y1 = [], x2 = [], y2 = [];
+
+                        for (var i=0; i<data1.length; i++) {
+                            row = data1[i];
+                            x1.push( row['time'] );
+                            y1.push( row['deltaO'] );
+                        }
+                        for (var i=0; i<data2.length; i++) {
+                            row = data2[i];
+                            x2.push( row['age'] );
+                            y2.push( row['sea level'] );
+                        }
+                        console.log('X1',x1, 'Y1',y1, 'X2',x2, 'Y2', y2);
+                        makePlotly(x1, y1, x2, y2);
+                    });
+                });
+            
+
+                function makePlotly(x1, y1, x2, y2){
+                    var plotDiv = document.getElementById("plot");
+                    var trace1 = {
+                        x: x1,
+                        y: y1,
+                        mode: 'markers',
+                        type: 'scatter',
+                        name: 'NGRIP'
+                    };
+                    var trace2 = {
+                        x: x2,
+                        y: y2,
+                        xaxis: 'x2',
+                        yaxis: 'y2',
+                        mode: 'lines',
+                        name: 'R.S.L'
+                    };
+                    var data = [trace1, trace2];
+                    var layout = {
+                        showlegend: false,
+                        grid: {rows: 2, columns: 1, pattern: 'independent'},
+                        title: {text:'Model response to step change'},
+                        xaxis1: {title: {text: 'Time (yrs)'}, range: [0, 40]},
+                        yaxis1: {title: {text: 'NGRIP delta O'}},
+                        xaxis2: {title: {text: 'Time (yrs)'}, range: [0, 40]},
+                        yaxis2: {title: {text: 'R.S.L. (m)'}}
+                    };
+
+                    Plotly.newPlot('NGRIP', data, layout).then(Reveal.layout);
+                };
+            });
+        </script>
+        
+        <!-- plot of Nb compostion and ice sheet history -->
+        
+        <script>
+            Reveal.addEventListener('Nb-raw-is-visible', function() {
+                Plotly.d3.csv("data/Nb_raw.csv", function(error1, data1) {
+                    Plotly.d3.csv("data/Ice_raw.csv", function(error2, data2) { 
+                        var x1 = [], y1 = [], x2 = [], y2 = [];
+
+                        for (var i=0; i<data1.length; i++) {
+                            row = data1[i];
+                            x1.push( row['age'] );
+                            y1.push( row['Nb'] );
+                        }
+                        for (var i=0; i<data2.length; i++) {
+                            row = data2[i];
+                            x2.push( row['age'] );
+                            y2.push( row['Ice'] );
+                        }
+                        console.log('X1',x1, 'Y1',y1, 'X2',x2, 'Y2', y2);
+                        makePlotly(x1, y1, x2, y2);
+                    });
+                });
+            
+
+                function makePlotly(x1, y1, x2, y2){
+                    var plotDiv = document.getElementById("plot");
+                    var trace1 = {
+                        x: x1,
+                        y: y1,
+                        mode: 'markers',
+                        type: 'scatter',
+                        name: 'Nb composition'
+                    };
+                    var trace2 = {
+                        x: x2,
+                        y: y2,
+                        xaxis: 'x2',
+                        yaxis: 'y2',
+                        mode: 'lines',
+                        name: 'Ice Sheet'
+                    };
+                    var data = [trace1, trace2];
+                    var layout = {
+                        showlegend: false,
+                        grid: {rows: 2, columns: 1, pattern: 'independent'},
+                        title: {text:'Model response to step change'},
+                        xaxis1: {title: {text: 'Time (yrs)'}, range: [0, 40]},
+                        yaxis1: {title: {text: 'Nb (ppm)'}},
+                        xaxis2: {title: {text: 'Time (yrs)'}, range: [0, 40]},
+                        yaxis2: {title: {text: 'Ice Thickness (km)'}}
+                    };
+
+                    Plotly.newPlot('Nb-raw', data, layout).then(Reveal.layout);
+                };
+            });
+        </script>
+                
         <!-- plot of ice sheet thickness  -->
+        
         <script>
             Reveal.addEventListener('ice-thickness-is-visible', function() {
                 Plotly.d3.csv("data/iceland.csv", processData);
@@ -219,11 +391,9 @@
                         yaxis: {title: {text: 'Thickness (km)'}}
                     };
                     
-                    Plotly.newPlot('ice-thickness', data, layout, {responsive: true});
+                    Plotly.newPlot('ice-thickness', data, layout).then(Reveal.layout);
                 };
-                
             });
-            
         </script>
         
         <!-- step change in ice thickness, permeability coeff. 10^-7 -->
