@@ -1,0 +1,340 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>The importance of ice sheet growth and retreat on magmatism and mantle CO<sup>2</sup> flux</title>
+
+		<link rel="stylesheet" href="reveal.js/css/reveal.css">
+		<link rel="stylesheet" href="reveal.js/css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'reveal.js/text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );           
+		</script>
+        
+        <!-- Plotly -->
+        <script src="plotly.js/plotly-latest.min.js">
+        </script>
+	</head>
+    
+    <!-- presentation starts here -->
+    
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h3>The importance of ice sheet growth and retreat on magmatism and mantle CO<sub>2</sub> flux</h3>
+					<p>John Armitage</p>
+                    <small>Kenni Petersen, Dave Ferguson, and Tim Creyts</small>
+				</section>
+                
+                <!-- some background on the subject -->
+                
+				<section>
+					<section data-background='figures/title-page.jpg'>
+						<h3>Can deglaciation impact mantle processus? </h3>
+                        <p> Iceland </p>
+					</section>
+					<section>
+						<p> In the latest Pleistocene the Icelandic ice sheet rapidly melted.</p>
+                        <p> The result was an observed increase in volcanism (e.g. Maclennan et al. 2002).</p>
+						<img width="900" src='figures/slide1.png' style="background:none; border:none; box-shadow:none;" >
+					</section>
+                </section>
+                
+                <!-- making an ice sheet history -->
+                
+                <section>
+                    <section>
+                        <h3> An ice sheet thickness history </h3>
+                    </section>
+                    
+                    <section data-state="ice-thickness-is-visible">
+                        <div id="ice-thickness"></div>
+                    </section>
+                </section>
+                
+                <!-- the observed association with melt composition cahnge and ice sheet history -->
+                
+                <section>                  
+                    <section>
+                        <p> The increase in volcansim is also recorded as a reduction in Nb composition (Gee et al., 1998; Eason et al., 2015).</p>
+                        <img width="1000" src='figures/slide2.png' style="background:none; border:none; box-shadow:none;" >
+                    </section>
+                    
+                </section>
+                
+                <!-- testing the association -->
+                
+                <section>                    
+                    <section>
+                        <p> Can the loss in surface load really impact melting?</p>
+                        <table>
+                            <thead><tr>
+                                <th>Ice on top</th>
+                                <th>Ice gone</th>
+                                </tr>
+                            </thead>
+                            <tbody><tr>
+                                <td>
+                                    <img width="300" src="figures/slide3_a.png" style="background:none; border:none; box-shadow:none;">
+                                </td>
+                                <td>
+                                    <img width="300" src="figures/slide3_b.png" style="background:none; border:none; box-shadow:none;">
+                                </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </section>
+                    <section>
+                        <p> Lets solve for melt production and percolation, in 1D: </p>
+                        <small> Mean velocity: $$ v = (1-\phi) v_{s} + \phi v_{l} = u + \partial_{t}w $$ </small><br><br>
+                        <small> Conservation of energy: $$ mL + \partial_{t}T + v\partial_{z}T - \kappa\partial_{z}^{2}T = 0 $$</small><br><br>
+                        <small> Permeability closure equation: $$ k = k_{0}\phi^{3} $$</small><br><br>
+                        <small> Conservation of mass (melt): $$ -m + \partial_{t}\phi + v\partial_{z}\phi + \frac{k_{0}\Delta\rho}{\eta_{l}} \phi_{2}\left(1-\frac{4}{3}\phi\right)\partial_{z}\phi = 0$$</small>                    
+                    </section>
+                    <section>
+                        <p> Solve the coupled equations for a melting column below a flexing plate </p>
+                        <img width="900" src='figures/slide3.png' style="background:none; border:none; box-shadow:none;" >
+                    </section>
+                    
+                    <section data-state="modelStep7-is-visible">
+                        <p> Prediction of eruption rate, $\phi v_{l}$, at the top </p>
+                        <div id="modelStep7"></div>
+                    </section>
+                    <section data-state="modelStep5-is-visible">
+                        <p> Prediction of eruption rate, $\phi v_{l}$, at the top </p>
+                        <div id="modelStep5"></div>
+                    </section>
+                    
+                    
+                    
+                    <section>
+                        <p> Compare predicted $\phi$ with inverted $V_{S}$ </p>
+                        <img width="900" src='figures/slide5.png' style="background:none; border:none; box-shadow:none;" >
+                    </section>
+                    <section>
+                        <p> Force model with a realistic ice sheet history </p>
+                        <img width="800" src='figures/slide6_a.png' style="background:none; border:none; box-shadow:none;" >
+                    </section>
+                    <section>
+                        <p> Force model with a realistic ice sheet history </p>
+                        <img width="800" src='figures/slide6_b.png' style="background:none; border:none; box-shadow:none;" >
+                    </section>
+                    <section>
+                        <h3> So deglaciation does most likely impact the deep: </h3>
+                        <p> (1) Melt retention is however low to match shallow $V_{S}$ anomaly. </p>
+                        <p> (2) Melt production however must increase to match Nb composition. </p>
+                    </section>
+                    
+				</section>
+                <section>
+                    <section>
+                        <h3> CO<sup>2</sup> flux </h3>
+                    </section>
+                </section>
+                
+			</div>
+		</div>
+
+		<script src="reveal.js/lib/js/head.min.js"></script>
+		<script src="reveal.js/js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+                
+                width: "100%",
+                height: "100%",
+                
+                math: {
+                    mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+                    //mathjax: 'MathJax/MathJax.js',
+                    config: 'TeX-AMS_HTML-full' // See http://docs.mathjax.org/en/latest/config-files.html
+                },
+				dependencies: [
+					{ src: 'reveal.js/plugin/markdown/marked.js' },
+					{ src: 'reveal.js/plugin/markdown/markdown.js' },
+					{ src: 'reveal.js/plugin/notes/notes.js', async: true },
+					{ src: 'reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+                    { src: 'reveal.js/plugin/math/math.js', async: true }
+				]
+			});
+        </script>
+        
+        <!-- plotly plots -->
+        
+        <!-- plot of ice sheet thickness  -->
+        <script>
+            Reveal.addEventListener('ice-thickness-is-visible', function() {
+                Plotly.d3.csv("data/iceland.csv", processData);
+                
+                function processData(allRows) {
+                
+                    console.log(allRows);
+                    var x = [], y1 = [], y2 = [];
+
+                    for (var i=0; i<allRows.length; i++) {
+                        row = allRows[i];
+                        x.push( row['time'] );
+                        y1.push( row['ice5g'] );
+                        y2.push( row['pico'] );
+                    }
+                    console.log( 'X',x, 'Y1',y1, 'Y2', y2);
+                    makePlotly( x, y1, y2);
+                }              
+                
+                function makePlotly( x, y1, y2){
+                    var plotDiv = document.getElementById("plot");
+                    var trace1 = {
+                        x: x,
+                        y: y1,
+                        mode: 'lines',
+                        name: 'ICE5G'
+                    };
+                    var trace2 = {
+                        x: x,
+                        y: y2,
+                        mode: 'lines',
+                        name: 'PC2'
+                    };
+                    var data = [trace1, trace2];
+                    var layout = {
+                        //autosize: false,
+                        //width: 1000,
+                        //height: 500,
+                        title: {text:'Iceland Ice Sheet - ICE5G model'},
+                        xaxis: {title: {text: 'Time (yrs)'}},
+                        yaxis: {title: {text: 'Thickness (km)'}}
+                    };
+                    
+                    Plotly.newPlot('ice-thickness', data, layout, {responsive: true});
+                };
+                
+            });
+            
+        </script>
+        
+        <!-- step change in ice thickness, permeability coeff. 10^-7 -->
+        <script>
+            Reveal.addEventListener('modelStep7-is-visible', function() {
+                Plotly.d3.csv("data/modelStep_1e-5.csv", processData);
+                
+                function processData(allRows) {
+                    console.log(allRows);
+                    var x = [], y1 = [], y2 = [];
+                    
+                    for (var i=0; i<allRows.length; i++) {
+                        row = allRows[i];
+                        x.push( row['time'] );
+                        y1.push( row['ice_sheet'] );
+                        y2.push( row['erupt_rate'] );
+                    }
+                        
+                    console.log( 'X',x, 'Y1',y1, 'Y2', y2);
+                    makePlotly( x, y1, y2);
+                }
+                
+                function makePlotly( x, y1, y2){
+                    var plotDiv = document.getElementById("plot");
+                    var trace1 = {
+                        x: x,
+                        y: y1,
+                        mode: 'lines',
+                        name: 'Ice Sheet'
+                    };
+                    var trace2 = {
+                        x: x,
+                        y: y2,
+                        xaxis: 'x2',
+                        yaxis: 'y2',
+                        mode: 'lines',
+                        name: 'Eruption Rate'
+                    };
+                    var data = [trace1, trace2];
+                    var layout = {
+                        //autosize: false,
+                        //width: 1000,
+                        //height: 500,
+                        grid: {rows: 2, columns: 1, pattern: 'independent'},
+                        title: {text:'Model response to step change'},
+                        xaxis1: {title: {text: 'Time (yrs)'}, range: [0, 120]},
+                        yaxis1: {title: {text: 'Ice Thickness (km)'}, range: [0, 2.5]},
+                        xaxis2: {title: {text: 'Time (yrs)'}, range: [0, 120]},
+                        yaxis2: {title: {text: 'Eruption rate (km/Myr)'}, range: [0, 10]}
+                    };
+                
+                        Plotly.newPlot('modelStep7', data, layout);
+                };
+            });
+            
+        </script>
+            
+        <!-- step change in ice thickness, permeability coeff. 10^-7 -->      
+        <script>
+            Reveal.addEventListener('modelStep5-is-visible', function() {
+                Plotly.d3.csv("data/modelStep_1e-5.csv", processData);
+                
+                function processData(allRows) {
+                    console.log(allRows);
+                    var x = [], y1 = [], y2 = [];
+                    
+                    for (var i=0; i<allRows.length; i++) {
+                        row = allRows[i];
+                        x.push( row['time'] );
+                        y1.push( row['ice_sheet'] );
+                        y2.push( row['erupt_rate'] );
+                    }
+                        
+                    console.log( 'X',x, 'Y1',y1, 'Y2', y2);
+                    makePlotly( x, y1, y2);
+                }
+                
+                function makePlotly( x, y1, y2){
+                    var plotDiv = document.getElementById("plot");
+                    var trace1 = {
+                        x: x,
+                        y: y1,
+                        mode: 'lines',
+                        name: 'Ice Sheet'
+                    };
+                    var trace2 = {
+                        x: x,
+                        y: y2,
+                        xaxis: 'x2',
+                        yaxis: 'y2',
+                        mode: 'lines',
+                        name: 'Eruption Rate'
+                    };
+                    var data = [trace1, trace2];
+                    var layout = {
+                        //autosize: false,
+                        //width: 1000,
+                        //height: 500,
+                        grid: {rows: 2, columns: 1, pattern: 'independent'},
+                        title: {text:'Model response to step change'},
+                        xaxis1: {title: {text: 'Time (yrs)'}, range: [0, 120]},
+                        yaxis1: {title: {text: 'Ice Thickness (km)'}, range: [0, 2.5]},
+                        xaxis2: {title: {text: 'Time (yrs)'}, range: [0, 120]},
+                        yaxis2: {title: {text: 'Eruption rate (km/Myr)'}, range: [0, 10]}
+                    };
+                    
+                    Plotly.newPlot('modelStep5', data, layout);
+                };
+                
+            });
+
+        </script>
+	</body>
+</html>
