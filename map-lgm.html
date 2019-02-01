@@ -1,0 +1,71 @@
+<!-- map of iceland with lava ages from the WVZ -->
+
+<!doctype html>
+<html>
+<head>
+	<title>Testing Map</title>
+	<meta charset="utf-8">
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.css" />
+	<style>
+		html {
+			height: 100%
+		}
+
+		body {
+			height: 100%;
+			margin: 0;
+			padding: 0;
+		}
+
+		#map {
+			height: 100%
+		}
+        .legend {
+            text-align: left;
+            line-height: 18px;
+            color: #555;
+        }
+        .legend i {
+            width: 18px;
+            height: 18px;
+            float: left;
+            margin-right: 8px;
+            opacity: 0.7;
+        }
+	</style>
+</head>
+<body>
+
+    <div id="map"></div>
+    <script src="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js"></script>
+    <script src="catiline.js"></script>
+    <script src="leaflet.shpfile.js"></script>
+    <script>
+        var m = L.map('map').setView([64.9631, -19.0208], 4);
+        var Esri_WorldTopoMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
+            attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ, TomTom, Intermap, iPC, USGS, FAO, NPS, NRCAN, GeoBase, Kadaster NL, //               Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community'
+        }).addTo(m);
+
+        function polystyle() {
+            return {
+                fillColor: '#756BB1',
+                weight: 2,
+                opacity: 1,
+                color: '#08519c',  //Outline color
+                fillOpacity: 0.7
+            };
+        }
+            
+        // import the shapefile and give it its properties
+        
+        var shpfile = new L.Shapefile('data/lgm_global.zip', {
+            style: polystyle 
+        });
+        shpfile.addTo(m);
+        shpfile.once("data:loaded", function() {
+            console.log("finished loaded shapefile");
+        });
+                
+    </script>
+</body>
+</html>

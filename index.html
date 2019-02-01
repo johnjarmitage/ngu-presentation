@@ -28,6 +28,14 @@
         <!--- math.js -->
         <script src="math.js/math.min.js">
         </script>
+        
+        <!--- iframe style -->
+        <style>
+            .p_iframe iframe {
+                width:100%;
+                height:576px;
+            }
+        </style>
 	</head>
     
     <!-- presentation starts here -->
@@ -49,9 +57,20 @@
                         <p> Iceland </p>
 					</section>
 					<section>
-						<p> In the latest Pleistocene the Icelandic ice sheet rapidly melted.</p>
-                        <p> The result was an observed increase in volcanism (e.g. Maclennan et al. 2002).</p>
-						<img width="900" src='figures/slide1.png' style="background:none; border:none; box-shadow:none;" >
+                        <div class="p_iframe">
+                        <iframe frameborder="0" seamless='seamless' scrolling=no src="map-lgm.html"></iframe>
+                        </div>
+                    </section>
+                    <section>
+                        <div class="p_iframe">
+                        <iframe frameborder="0" seamless='seamless' scrolling=no src="map-wvz.html"></iframe>
+                        </div>
+                    </section>
+                    
+                    <section>
+						<small> In the latest Pleistocene the Icelandic ice sheet rapidly melted.</small>
+                        <small> The result was an observed increase in volcanism (e.g. Sinton et al., 2005).</small>
+						<img width="600" src='figures/sinton.png' style="background:none; border:none; box-shadow:none;" >
 					</section>
                 </section>
                 
