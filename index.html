@@ -200,15 +200,26 @@
                         <small> Prediction of eruption rate, $\phi v_{l}$ when $k_{0} = 10^{-5}$ </small>
                         <div id="modelStep5"></div>
                     </section>
-                       
-                    
-                    
+                </section>
+                
+                <!-- low seismic velocities beneath Iceland -->
+                
+                <section>
                     <section>
-                        <p> Compare predicted $\phi$ with inverted $V_{S}$ </p>
-                        <img width="900" src='figures/slide5.png' style="background:none; border:none; box-shadow:none;" >
+                        <h3> What can we learn from the mantle structure?</h3>
                     </section>
-                    
-                    
+                    <section data-background="white">
+                        <small>Cross section of seismic velocity (Allen et al., 2001) </small>
+                        <img width="80%" src='figures/allenIceland1.png' style="background:none; border:none; box-shadow:none;" >
+                    </section>
+                    <section data-background="white">
+                        <small>Cross section of seismic velocity (Allen et al., 2001) </small>
+                        <img width="80%" src='figures/allenIceland2.png' style="background:none; border:none; box-shadow:none;" >
+                    </section>
+                    <section data-state="Vs-depth-is-visible">
+                        <small> Compare predicted $\phi$ with inverted $V_{S}$ </small>
+                        <div id="Vs-depth"></div>
+                    </section>
                     
                 </section>
                 
@@ -757,6 +768,151 @@
                     };
                     
                     Plotly.newPlot('modelStep5', data, layout).then(Reveal.layout);
+                };              
+            });
+        </script>
+        
+        <!-- depth, Vs, and phi -->
+        
+        <script>
+            Reveal.addEventListener('Vs-depth-is-visible', function() {
+                Plotly.d3.csv("data/Vs_1e-5.csv", function(error1, data1) {
+                    Plotly.d3.csv("data/Vs_1e-7.csv", function(error2, data2) {
+                        Plotly.d3.csv("data/Vs_obs.csv", function(error3, data3) {
+                            var x1 = [], y11 = [], y12 = [], y13 = [];
+                            var x2 = [], y21 = [], y22 = [], y23 = [];
+                            var x3 = [], y31 = [], y32 = [];
+
+                            for (var i=0; i<data1.length; i++) {
+                                row = data1[i];
+                                x1.push( row['depth'] );
+                                y11.push( row['Vsana'] );
+                                y12.push( row['Vsphi'] );
+                                y13.push( row['phi'] );
+                            }
+                            for (var i=0; i<data2.length; i++) {
+                                row = data2[i];
+                                x2.push( row['depth'] );
+                                y21.push( row['Vsana'] );
+                                y22.push( row['Vsphi'] );
+                                y23.push( row['phi'] );
+                            }
+                            for (var i=0; i<data3.length; i++) {
+                                row = data3[i];
+                                x3.push( row['depth'] );
+                                y31.push( row['Vmin'] );
+                                y32.push( row['Vmax'] );
+                            }
+                            makePlotly(x1, y11, y12, y13, x2, y21, y22, y23, x3, y31, y32);
+                        });
+                    }); 
+                });
+                    
+                function makePlotly(x1, y11, y12, y13, x2, y21, y22, y23, x3, y31, y32){
+                    var plotDiv = document.getElementById("plot");
+                    var tracephi1 = {
+                        x: y13,
+                        y: x1,
+                        mode: 'lines',
+                        marker: {color: 'rgb(142, 124, 195)'},
+                        name: 'Porosity, k=1e-5'
+                    };
+                    var tracephi2 = {
+                        x: y23,
+                        y: x2,
+                        mode: 'lines',
+                        marker: {color: 'rgb(255, 217, 102)'},
+                        name: 'Porosity, k=1e-5'
+                    };
+                    var traceobsmin1 = {
+                        x: y31,
+                        y: x3,
+                        xaxis: 'x2',
+                        yaxis: 'y2',
+                        mode: 'lines',
+                        marker: {color: 'rgb(200, 200, 200)'},
+                        name: 'Observation min.'
+                    };
+                    var traceobsmax1 = {
+                        x: y32,
+                        y: x3,
+                        xaxis: 'x2',
+                        yaxis: 'y2',
+                        mode: 'lines',
+                        marker: {color: 'rgb(150, 150, 150)'},
+                        name: 'Observation max.'
+                    };
+                    var tracevana1 = {
+                        x: y11,
+                        y: x1,
+                        xaxis: 'x2',
+                        yaxis: 'y2',
+                        mode: 'lines',
+                        marker: {color: 'rgb(142, 124, 195)'},
+                        line: {dash: 'dashdot'},
+                        name: 'Vs, k=1e-5, no melt'
+                    };
+                    var tracevphi1 = {
+                        x: y12,
+                        y: x1,
+                        xaxis: 'x2',
+                        yaxis: 'y2',
+                        marker: {color: 'rgb(142, 124, 195)'},
+                        mode: 'lines',
+                        name: 'Vs, k=1e-5, melt'
+                    };
+                    var traceobsmin2 = {
+                        x: y31,
+                        y: x3,
+                        xaxis: 'x3',
+                        yaxis: 'y3',
+                        mode: 'lines',
+                        marker: {color: 'rgb(200, 200, 200)'},
+                        name: 'Observation min.'
+                    };
+                    var traceobsmax2 = {
+                        x: y32,
+                        y: x3,
+                        xaxis: 'x3',
+                        yaxis: 'y3',
+                        mode: 'lines',
+                        marker: {color: 'rgb(150, 150, 150)'},
+                        name: 'Observation max.'
+                    };
+                    var tracevana2 = {
+                        x: y21,
+                        y: x2,
+                        xaxis: 'x3',
+                        yaxis: 'y3',
+                        mode: 'lines',
+                        marker: {color: 'rgb(255, 217, 102)'},
+                        line: {dash: 'dashdot'},
+                        name: 'Vs, k=1e-5, no melt'
+                    };
+                    var tracevphi2 = {
+                        x: y22,
+                        y: x2,
+                        xaxis: 'x3',
+                        yaxis: 'y3',                 
+                        mode: 'lines',
+                        marker: {color: 'rgb(255, 217, 102)'},
+                        name: 'Vs, k=1e-5, melt'
+                    };
+
+                    var data = [tracephi1, tracephi2, traceobsmin1, traceobsmax1, tracevana1, tracevphi1,
+                                traceobsmin2, traceobsmax2, tracevana2, tracevphi2];
+                    var layout = {
+                        grid: {rows: 1, columns: 3, pattern: 'independent'},
+                        title: {text:'Depth Profiles'},
+                        xaxis1: {title: {text: 'Porosity'}, range: [0, 0.01]},
+                        yaxis1: {title: {text: 'Depth (km)'}, range: [150, 30]},
+                        xaxis2: {title: {text: 'Vs (km/s)'}, range: [3.6, 4.4]},
+                        yaxis2: {title: {text: 'Depth (km)'}, range: [150, 30]},
+                        xaxis3: {title: {text: 'Vs (km/s)'}, range: [3.6, 4.4]},
+                        yaxis3: {title: {text: 'Depth (km)'}, range: [150, 30]}
+                    };
+                    
+                    Plotly.newPlot('Vs-depth', data, layout).then(Reveal.layout);
                 };              
             });
         </script>

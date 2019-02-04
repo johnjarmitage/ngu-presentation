@@ -41,11 +41,25 @@
     <script src="catiline.js"></script>
     <script src="leaflet.shpfile.js"></script>
     <script>
-        var m = L.map('map').setView([64.9631, -19.0208], 4);
+        
         var Esri_WorldTopoMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
             attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ, TomTom, Intermap, iPC, USGS, FAO, NPS, NRCAN, GeoBase, Kadaster NL, //               Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community'
-        }).addTo(m);
+        });
+        
+        var Stamen_Toner = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}.{ext}', {
+            attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+            subdomains: 'abcd',
+            minZoom: 0,
+            maxZoom: 20,
+            ext: 'png'
+        });
 
+        var CartoDB_DarkMatter = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+            subdomains: 'abcd',
+            maxZoom: 19
+        });
+        
         function polystyle() {
             return {
                 fillColor: '#756BB1',
@@ -61,10 +75,31 @@
         var shpfile = new L.Shapefile('data/lgm_global.zip', {
             style: polystyle 
         });
-        shpfile.addTo(m);
         shpfile.once("data:loaded", function() {
             console.log("finished loaded shapefile");
         });
+                
+        // make map and layers
+        
+        var map = L.map('map', {
+            center: [64.9631, -19.0208],
+            zoom: 4,
+            layers: [Esri_WorldTopoMap]
+        });
+        
+        var lgm = L.layerGroup([shpfile]);
+        
+        var baseMaps = {
+            "World Topo": Esri_WorldTopoMap,
+            "Stamen Toner": Stamen_Toner,
+            "Dark Matter": CartoDB_DarkMatter
+        };
+
+        var overlayMaps = {
+            "L.G.M.": lgm
+        };
+        
+        L.control.layers(baseMaps, overlayMaps).addTo(map);
                 
     </script>
 </body>
