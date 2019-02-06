@@ -170,6 +170,12 @@
                         </div>
                         <small> That non-linear equation solved using finite elements (FEniCS + Python) </small>
                     </section>
+                    <section data-background-color="#000000">
+                        <div style="overflow: auto; max-height: 80vh;">
+                            <video width='1200px' data-autoplay loop controls='true' src='videos/poro.mp4' type='video/mp4'></video>
+                        </div>
+                        <small> That non-linear equation solved using finite elements (FEniCS + Python) </small>
+                    </section>                    
                     
                     <!-- step 2 to solve the coupled equations-->
                     
@@ -197,9 +203,15 @@
                     </section>
                     <section data-background="white">
                         <div>
+                            <video width='60%' data-autoplay controls='true' src='videos/1e7.mp4' type='video/mp4'></video>
+                        </div>
+                        <small> $k_{0}=10^{-7}$m<sup>2</sup>; melt percolation solved using a finite volume TVD scheme (Matlab) </small>
+                    </section>
+                    <section data-background="white">
+                        <div>
                             <video width='60%' data-autoplay controls='true' src='videos/1e5.mp4' type='video/mp4'></video>
                         </div>
-                        <small> Melt percolation solved using a finite volume TVD scheme (Matlab) </small>
+                        <small> $k_{0}=10^{-5}$m<sup>2</sup>; melt percolation solved using a finite volume TVD scheme (Matlab) </small>
                     </section>
                     <section data-state="modelStep7-is-visible">
                         <small> Prediction of eruption rate, $\phi v_{l}$ when $k_{0} = 10^{-7}$ </small>
@@ -279,11 +291,6 @@
                           <div style="overflow-y: auto; max-height: 80vh;">
                             <img width="80%" height="80%" src='figures/figure4.png' style="background:none; border:none; box-shadow:none;" >
                         </div>
-                    </section>
-                    <section>
-                        <h3> So deglaciation does most likely impact the deep: </h3>
-                        <p> (1) Melt retention is however low to match shallow $V_{S}$ anomaly. </p>
-                        <p> (2) Melt production however must increase to match Nb composition. </p>
                     </section>
                 </section>
                 
@@ -976,7 +983,7 @@
                         x: y23,
                         y: x2,
                         mode: 'lines',
-                        marker: {color: 'rgb(255, 217, 102)'},
+                        marker: {color: 'rgb(222, 45, 38)'},
                         name: 'Porosity, k=1e-5'
                     };
                     var traceobsmin1 = {
@@ -1040,9 +1047,9 @@
                         xaxis: 'x3',
                         yaxis: 'y3',
                         mode: 'lines',
-                        marker: {color: 'rgb(255, 217, 102)'},
+                        marker: {color: 'rgb(222, 45, 38)'},
                         line: {dash: 'dashdot'},
-                        name: 'Vs, k=1e-5, no melt'
+                        name: 'Vs, k=1e-7, no melt'
                     };
                     var tracevphi2 = {
                         x: y22,
@@ -1050,8 +1057,8 @@
                         xaxis: 'x3',
                         yaxis: 'y3',                 
                         mode: 'lines',
-                        marker: {color: 'rgb(255, 217, 102)'},
-                        name: 'Vs, k=1e-5, melt'
+                        marker: {color: 'rgb(222, 45, 38)'},
+                        name: 'Vs, k=1e-7, melt'
                     };
 
                     var data = [tracephi1, tracephi2, traceobsmin1, traceobsmax1, tracevana1, tracevphi1,
@@ -1340,7 +1347,7 @@
                         yaxis: 'y2',
                         type: 'scatter',
                         mode: 'markers',
-                        name: 'Nb PC2'
+                        name: 'Nb observation'
                     };
                     var data = [trace1, trace2, trace3, trace4, trace5];
                     var layout = {
